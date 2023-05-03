@@ -33,7 +33,7 @@ $
     \includesvg[scale=0.5]{graphs/graph1}
 \end{center}
 \emph{Матрица односторнней связности:}
-\begin{equation}
+\begin{equation*}
 A = A(D) = 
 \begin{tabular}{ | c | c | c | c | c | c | } 
     \hline
@@ -48,7 +48,7 @@ A = A(D) =
     $v_{4}$ & 0 & 0 & 0 & 0\\
     \hline
 \end{tabular}.
-\end{equation}
+\end{equation*}
 $
 A^{2} = 
 \begin{pmatrix}
@@ -93,7 +93,7 @@ A^{3} = A \cdot A^{2} =
     0 & 0 & 0 & 0\\
 \end{pmatrix}.
 $
-\begin{equation}
+\begin{equation*}
     \begin{split}
     T(D) = E \lor A \lor A^{2} \lor A^{3} =
     \begin{pmatrix}
@@ -132,9 +132,9 @@ $
         0 & 0 & 0 & 1\\
     \end{pmatrix}.
     \end{split}
-\end{equation}
+\end{equation*}
 \emph{Матрица двусторонней связности:}
-\begin{equation}
+\begin{equation*}
 S(D) = T(D) \& [T(D)]^\mathrm{T} =     
 \begin{pmatrix}
     1 & 1 & 0 & 1\\
@@ -156,11 +156,11 @@ S(D) = T(D) \& [T(D)]^\mathrm{T} =
     0 & 0 & 1 & 0\\
     0 & 0 & 0 & 1\\
 \end{pmatrix}.
-\end{equation}
+\end{equation*}
 $S(D)=E\Rightarrow$ в графе $D$ нет контуров.
 
 \emph{Компонентны сильной связности:}
-\begin{equation}
+\begin{equation*}
 S_2(D) = S(D) = 
 \begin{tabular}{ | c | c | c | c | c | c | } 
     \hline
@@ -175,7 +175,7 @@ S_2(D) = S(D) =
     $v_{4}$ & 0 & 0 & 0 & 1\\
     \hline
 \end{tabular}
-\end{equation}
+\end{equation*}
 $D_1=(V_1,X_1), V_1=\{v_1\}$
 
 $A(D_1)=$
@@ -188,7 +188,7 @@ $A(D_1)=$
 \end{tabular}\hspace{1cm}$D_1:$\hspace{1cm}
 \includesvg[scale=0.09]{graphs/cfc1}
 
-\begin{equation}
+\begin{equation*}
     S_2(D) = 
     \begin{tabular}{ | c | c | c | c |  } 
         \hline
@@ -201,7 +201,7 @@ $A(D_1)=$
         $v_{4}$ & 0 & 0 & 1\\
         \hline
     \end{tabular}
-\end{equation}
+\end{equation*}
 $D_2=(V_2,X_2), V_2=\{v_2\}$
 
 $A(D_2)=$
@@ -214,7 +214,7 @@ $A(D_2)=$
 \end{tabular}\hspace{1cm}$D_2:$\hspace{1cm}
 \includesvg[scale=0.09]{graphs/cfc2}
 
-\begin{equation}
+\begin{equation*}
     S_3(D) = 
     \begin{tabular}{ | c | c | c |  } 
         \hline
@@ -225,7 +225,7 @@ $A(D_2)=$
         $v_{4}$  & 0 & 1\\
         \hline
     \end{tabular}
-\end{equation}
+\end{equation*}
 $D_3=(V_3,X_3), V_3=\{v_3\}$
 
 $A(D_3)=$
@@ -238,7 +238,7 @@ $A(D_3)=$
 \end{tabular}\hspace{1cm}$D_3:$\hspace{1cm}
 \includesvg[scale=0.09]{graphs/cfc3}
 
-\begin{equation}
+\begin{equation*}
     S_4(D) = 
     \begin{tabular}{ | c | c | } 
         \hline
@@ -247,7 +247,7 @@ $A(D_3)=$
         $v_{4}$ & 1\\ 
         \hline
     \end{tabular}
-\end{equation}
+\end{equation*}
 $D_4=(V_4,X_4), V_4=\{v_4\}$
 
 $A(D_4)=$
@@ -261,7 +261,7 @@ $A(D_4)=$
 \includesvg[scale=0.09]{graphs/cfc4}
 
 \emph{Матрица контуров:}
-\begin{equation}
+\begin{equation*}
     K(D)=A(D) \& S(D) = 
     \begin{pmatrix}
         0 & 1 & 0 & 1\\
@@ -282,7 +282,7 @@ $A(D_4)=$
         0 & 0 & 0 & 0\\
         0 & 0 & 0 & 0\\
     \end{pmatrix}
-\end{equation}
+\end{equation*}
 
 \textbf{2.} Используя алгоритм Терри, определить замкнутый маршрут, проходящий ровно по два раза
 (по одному в каждом направлении) через каждое ребро графа.
