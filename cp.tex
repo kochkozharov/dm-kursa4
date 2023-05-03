@@ -30,7 +30,7 @@ $
 
 \emph{Изображение графа:}
 \begin{center}
-    \includesvg[scale=0.5]{graph1}
+    \includesvg[scale=0.5]{graphs/graph1}
 \end{center}
 \emph{Матрица односторнней связности:}
 \begin{equation}
@@ -49,8 +49,7 @@ A = A(D) =
     \hline
 \end{tabular}.
 \end{equation}
-
-\begin{equation}
+$
 A^{2} = 
 \begin{pmatrix}
     0 & 1 & 0 & 1\\
@@ -71,29 +70,29 @@ A^{2} =
     0 & 1 & 0 & 1\\
     0 & 0 & 0 & 0\\
 \end{pmatrix}.
-\end{equation}
-\begin{equation}
-    A^{3} = A \cdot A^{2} =
-    \begin{pmatrix}
-        0 & 1 & 0 & 1\\
-        0 & 0 & 0 & 1\\
-        1 & 1 & 0 & 1\\
-        0 & 0 & 0 & 0\\
-    \end{pmatrix}
-    \begin{pmatrix}
-        0 & 0 & 0 & 1\\
-        0 & 0 & 0 & 0\\
-        0 & 1 & 0 & 1\\
-        0 & 0 & 0 & 0\\
-    \end{pmatrix}
-    =
-    \begin{pmatrix}
-        0 & 0 & 0 & 0\\
-        0 & 0 & 0 & 0\\
-        0 & 0 & 0 & 1\\
-        0 & 0 & 0 & 0\\
-    \end{pmatrix}.
-\end{equation}
+$\\
+$
+A^{3} = A \cdot A^{2} =
+\begin{pmatrix}
+    0 & 1 & 0 & 1\\
+    0 & 0 & 0 & 1\\
+    1 & 1 & 0 & 1\\
+    0 & 0 & 0 & 0\\
+\end{pmatrix}
+\begin{pmatrix}
+    0 & 0 & 0 & 1\\
+    0 & 0 & 0 & 0\\
+    0 & 1 & 0 & 1\\
+    0 & 0 & 0 & 0\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+    0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 1\\
+    0 & 0 & 0 & 0\\
+\end{pmatrix}.
+$
 \begin{equation}
     \begin{split}
     T(D) = E \lor A \lor A^{2} \lor A^{3} =
@@ -134,8 +133,9 @@ A^{2} =
     \end{pmatrix}.
     \end{split}
 \end{equation}
+\emph{Матрица двусторонней связности:}
 \begin{equation}
-T(D) = T(D) \& [T(D)]^{T} =     
+S(D) = T(D) \& [T(D)]^\mathrm{T} =     
 \begin{pmatrix}
     1 & 1 & 0 & 1\\
     0 & 1 & 0 & 1\\
@@ -157,5 +157,130 @@ T(D) = T(D) \& [T(D)]^{T} =
     0 & 0 & 0 & 1\\
 \end{pmatrix}.
 \end{equation}
+$S(D)=E\Rightarrow$ в графе $D$ нет контуров.
 
+\emph{Компонентны сильной связности:}
+\begin{equation}
+S_2(D) = S(D) = 
+\begin{tabular}{ | c | c | c | c | c | c | } 
+    \hline
+    & $v_{1}$ & $v_{2}$ & $v_{3}$ & $v_{4}$\\ 
+    \hline
+    $v_{1}$ & 1 & 0 & 0 & 0\\ 
+    \hline
+    $v_{2}$ & 0 & 1 & 0 & 0\\ 
+    \hline
+    $v_{3}$ & 0 & 0 & 1 & 0\\
+    \hline
+    $v_{4}$ & 0 & 0 & 0 & 1\\
+    \hline
+\end{tabular}
+\end{equation}
+$D_1=(V_1,X_1), V_1=\{v_1\}$
+
+$A(D_1)=$
+\begin{tabular}{|c|c|}
+    \hline
+    & $v_{1}$ \\ 
+    \hline
+    $v_{1}$ & 0 \\ 
+    \hline
+\end{tabular}\hspace{1cm}$D_1:$\hspace{1cm}
+\includesvg[scale=0.09]{graphs/cfc1}
+
+\begin{equation}
+    S_2(D) = 
+    \begin{tabular}{ | c | c | c | c |  } 
+        \hline
+        & $v_{2}$ & $v_{3}$ & $v_{4}$ \\ 
+        \hline
+        $v_{2}$ & 1 & 0 & 0\\ 
+        \hline
+        $v_{3}$ & 0 & 1 & 0\\
+        \hline
+        $v_{4}$ & 0 & 0 & 1\\
+        \hline
+    \end{tabular}
+\end{equation}
+$D_2=(V_2,X_2), V_2=\{v_2\}$
+
+$A(D_2)=$
+\begin{tabular}{|c|c|}
+    \hline
+    & $v_{2}$ \\ 
+    \hline
+    $v_{2}$ & 0 \\ 
+    \hline
+\end{tabular}\hspace{1cm}$D_2:$\hspace{1cm}
+\includesvg[scale=0.09]{graphs/cfc2}
+
+\begin{equation}
+    S_3(D) = 
+    \begin{tabular}{ | c | c | c |  } 
+        \hline
+        & $v_{3}$ & $v_{4}$ \\ 
+        \hline
+        $v_{3}$  & 1 & 0\\ 
+        \hline
+        $v_{4}$  & 0 & 1\\
+        \hline
+    \end{tabular}
+\end{equation}
+$D_3=(V_3,X_3), V_3=\{v_3\}$
+
+$A(D_3)=$
+\begin{tabular}{|c|c|}
+    \hline
+    & $v_{3}$ \\ 
+    \hline
+    $v_{3}$ & 0 \\ 
+    \hline
+\end{tabular}\hspace{1cm}$D_3:$\hspace{1cm}
+\includesvg[scale=0.09]{graphs/cfc3}
+
+\begin{equation}
+    S_4(D) = 
+    \begin{tabular}{ | c | c | } 
+        \hline
+        & $v_{4}$ \\ 
+        \hline
+        $v_{4}$ & 1\\ 
+        \hline
+    \end{tabular}
+\end{equation}
+$D_4=(V_4,X_4), V_4=\{v_4\}$
+
+$A(D_4)=$
+\begin{tabular}{|c|c|}
+    \hline
+    & $v_{4}$ \\ 
+    \hline
+    $v_{4}$ & 0 \\ 
+    \hline
+\end{tabular}\hspace{1cm}$D_4:$\hspace{1cm}
+\includesvg[scale=0.09]{graphs/cfc4}
+
+\emph{Матрица контуров:}
+\begin{equation}
+    K(D)=A(D) \& S(D) = 
+    \begin{pmatrix}
+        0 & 1 & 0 & 1\\
+        0 & 0 & 0 & 1\\
+        1 & 1 & 0 & 1\\
+        0 & 0 & 0 & 0\\
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 0 & 0 & 0\\
+        0 & 1 & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1\\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 & 0 & 0 & 0\\
+        0 & 0 & 0 & 0\\
+        0 & 0 & 0 & 0\\
+        0 & 0 & 0 & 0\\
+    \end{pmatrix}
+\end{equation}
 \end{document}
