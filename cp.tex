@@ -2,6 +2,7 @@
 \usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 \DeclareSymbolFont{matha}{OML}{txmi}{m}{it}% txfonts
 \DeclareMathSymbol{v}{\mathord}{matha}{118}
+\DeclareMathSymbol{l}{\mathord}{matha}{21}
 \usepackage[T1,T2A]{fontenc}
 \usepackage[russian]{babel}
 \usepackage[utf8]{inputenc}
@@ -382,4 +383,57 @@ v \in FW_k(v_1), v' \in FW_{k+1}(v_1)$, т.е. исходящие из верш�
 и заходящие в $v$). Из рисунка 2 видно, что всего существует два минимальных пути из $v_1$ в
 $v_8$: $v_1v_3v_4v_2v_5v_8$, $v_1v_6v_4v_2v_5v_8$.
 \begin{figure}[H]\centering\includesvg[scale=0.5]{graphs/fw2}\caption{График минимальных путей}\end{figure}
+\textbf{4.} Нагруженный орграф $D$ задан матрицей длин дуг $C(D)$. Найти минимальные пути из $v_1$ во все достижимые вершины.
+\[
+C(D)=
+\begin{pmatrix}
+    \infty & 4      & \infty & \infty & 5      & \infty & \infty & \infty \\
+    5      & \infty & 7      & 10     & 2      & \infty & \infty & \infty \\
+    \infty & \infty & \infty & 2      & \infty & 2      & \infty & \infty \\
+    6      & \infty & \infty & \infty & \infty & \infty & 3      & 5      \\
+    3      & 2      & \infty & \infty & \infty & 3      & 11     & \infty \\
+    4      & \infty & 2      & \infty & \infty & \infty & 7      & \infty \\
+    8      & \infty & \infty & 3      & \infty & \infty & \infty & 3      \\
+    \infty & \infty & \infty & \infty & 17     & \infty & \infty & \infty \\
+\end{pmatrix}
+\]
+
+\underline{\textbf{Решение.}}
+
+Используем алгоритм Форда. Сначала определим таблицу величин $l_{i}^{(i)}, i=1,2,\dots,n-1$, где $n=8$
+\begin{center}
+\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c |c |c |c |c |c |c |c |c |}
+    \hline
+    \rule{0pt}{14pt}& $v_1$ & $v_2$ & $v_3$ & $v_4$ & $v_5$ & $v_6$ & $v_7$ & $v_8$&
+    &$l^{(0)}$&$l^{(1)}$&$l^{(2)}$&$l^{(3)}$&$l^{(4)}$&$l^{(5)}$&$l^{(6)}$&$l^{(7)}$\\
+    \hline
+    $v_1$& $\infty$ & 4 & $\infty$ & $\infty$  & 5 & $\infty$  & $\infty$  & $\infty$&
+    &\\
+    \hline
+    $v_2$& 5 & $\infty$  & 7 & 10 & 2 & $\infty$ & $\infty$ & $\infty$&
+    &\\
+    \hline
+    $v_3$& $\infty$  & $\infty$  & $\infty$ & 2 & $\infty$ & 2 & $\infty$ & $\infty$&
+    &\\
+    \hline
+    $v_4$& 6 & $\infty$ & $\infty$ & $\infty$ & $\infty$ & $\infty$ & 3 & 5&
+    &\\
+    \hline
+    $v_5$& 3 & 2 & $\infty$ & $\infty$ & $\infty$ & 3 & 11 & $\infty$&
+    &\\
+    \hline
+    $v_6$& 4 & $\infty$ & 2 & $\infty$ & $\infty$ & $\infty$ & 7 & $\infty$&
+    &\\
+    \hline
+    $v_7$& 8 & $\infty$ & $\infty$ & 3 & $\infty$ & $\infty$ & $\infty$ & 3&
+    &\\
+    \hline
+    $v_8$& $\infty$ & $\infty$ & $\infty$ & $\infty$ & 17 & $\infty$ & $\infty$ & $\infty$&
+    &\\
+    \hline
+\end{tabular}
+\end{center}
+\hspace{3.5cm}$C(D)$\hspace{6.5cm}Таблица величин
+
+
 \end{document}
