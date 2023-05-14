@@ -3,4 +3,6 @@
 *.log
 *.aux
 *.fdb_latexmk
+*.pdf
+!cp.pdf
 /svg-inkscape
