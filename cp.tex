@@ -11,6 +11,7 @@
 \usepackage{svg}
 \usepackage{array}
 \usepackage{float}
+\usepackage{caption}
 \clubpenalty=10000 
 \widowpenalty=10000
 \title{"Курсовая работа по дискретной математике"}
@@ -464,7 +465,7 @@ $\{v_6,v_7\}$,$\{v_6,v_{10}\}$). Минимальную длину имеет р
 далее $\{v_{3},v_{4}\}$, далее $\{v_4,v_8\}$, далее $\{v_8,v_{12}\}$, далее $\{v_7,v_8\}$, далее $\{v_7,v_{11}\}$ и, наконец, $\{v_6,v_{10}\}$.
 Выделено $11 = 12-1 = n(G)-1$ ребер, алгоритм окончен, выделяем минимальное остовное дерево графа (см. на рис. 7 подграф графа $G$, ребра которого выделены жирными линиями).
 \begin{figure}[H]\centering\includesvg[scale=0.5]{graphs/kruskal_res}\caption{Граф $G$ с выделенным подграфом - минимальным остовным деревом}\end{figure}
-\textbf{5.} Пусть каждому ребру неориентированного графа
+\textbf{6.} Пусть каждому ребру неориентированного графа
 изображенного на рис. 8 соответствует некоторый элемент электрической цепи.
 Составить линейно независимые системы уравнений Кирхгофа для токов и напряжений.
 Пусть первому и пятому ребру соответствуют источники тока с ЭДС $E_1$ и $E_2$ (полярность
@@ -492,7 +493,7 @@ $\mu_4 = \mu_4(x_7)=x_7x_9x_6x_4, \mu_5=\mu_5(x_8)=x_8x_6x_9$
 Введем произвольную ориентацию на ребрах графа $G$. В результате каждое ребро $x_j$ превратится
 в дугу $\tilde{x_j}$ и, соответственно, множество ребер $X$ в множество дуг $\widetilde{X}$,
 а сам граф $G=(V,X)$ в орграф $D=(V,\widetilde{X})$. Для графа $G$, изображенного на рис. 8,
-в результате введения ориентации на его ребрах получаем, например, оргаф $D=(V, \widetilde{X})$,
+в результате введения ориентации на его ребрах получаем, например, орграф $D=(V, \widetilde{X})$,
 изображенный на рис. 10.
 \begin{figure}[H]\centering\includesvg[scale=0.7]{graphs/oriented_kirchhoff.svg}\caption{Орграф $D$}\end{figure}
 Для графа $G$ с выделенным ранее цикловым базисом $\mu1,\mu2,\mu3,\mu4,\mu5$ и выбранной ориентацией ребер,
@@ -526,7 +527,7 @@ C(G)=
     0&1&0&0&0\\
     0&0&-1&0&0\\
     0&0&0&-1&0\\
-    0&0&0&0&0\\
+    0&0&0&0&1\\
     \end{vmatrix}
     \neq0
 \]
@@ -592,4 +593,146 @@ C(G)=
 Таким образом, общей системой уравнений для токов является объединение систем. Заметим, что полученная объединенная система уравнений состоит из девяти
 уравнений относительно девяти неизвестных $i_1,i_2,\dots,i_{10}$: после нахождения которых
 нетрудно определить $u_1,u_2,\dots,u_{10}$.
+
+\textbf{7.} Построить максимальный поток по транспортной сети.
+\begin{figure}[H]\centering\includesvg[scale=0.7]{graphs/stream1.svg}\caption{Граф транспортной сети $D$}\end{figure}
+\underline{\textbf{Решение.}} Начинаем с нулевого потока $\phi_0$. Каждой новой цепи из $v_1$ в
+$v_n=v_5$ будем ставить в соответствие ее очередной номер, т.е. будем обозначать эти цепи через
+$\eta_1$, $\eta_2$ и т.д. Соответственно, после нахождения цепи $\eta_1$ поток $\phi_0$ изменится
+на поток $\phi_1$. После нахождения цепи $\eta_2$ поток $\phi_1$ изменится на $\phi_2$ и т.д.
+Числа, на которые увеличиваем потоки по дугам из $\eta_i$ обозначаем через $\alpha_i$. Насыщенные
+дуги при изображении транспортной сети $D$ с очередным потоком $\phi_i$ помечаем символом
+$\times$. На рис. 12 приведены изображения орграфа $D$ с потоком $\phi_0$, а так же вспомогательного
+орграфа $D'$, который на этом этапе совпадает с $D$. 
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream2.svg}
+        \caption*{$\phi_0$}
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream3.svg}
+        \caption*{$D'$}
+    \end{minipage}
+    \caption{}
+\end{figure}
+Выделяем в $D'$ простую цепь $\eta_1=v_1v_2v_4v_7v_9$ из $v_1$ в $v_9$. Увеличиваем
+поток $\phi(x)$ по каждой дуге $x$ из $\eta_1$ на одинаковую величину $\alpha_1=6$
+до насыщения дуг $(v_1v_2)$ и $(v_2v_4)$. На рис. 13 приведены изображения орграфа
+$D$ c потоком $\phi_1$, а также соответсвующего этому потоку вспомогательного орграфа $D'$.
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream4.svg}
+        \caption*{$\phi_1$}
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream5.svg}
+        \caption*{$D'$}
+    \end{minipage}
+    \caption{}
+\end{figure}
+Продолжаем выделять произвольные простые цепи и максимально увеличивать поток на них,
+а затем удалять насыщенные дуги, пока сток перестанет быть доступным из истока.
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream6.svg}
+        \caption*{$\phi_2$}
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream7.svg}
+        \caption*{$D'$}
+    \end{minipage}
+    \caption{}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream8.svg}
+        \caption*{$\phi_3$}
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream9.svg}
+        \caption*{$D'$}
+    \end{minipage}
+    \caption{}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream10.svg}
+        \caption*{$\phi_4$}
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream11.svg}
+        \caption*{$D'$}
+    \end{minipage}
+    \caption{}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream12.svg}
+        \caption*{$\phi_5$}
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream13.svg}
+        \caption*{$D'$}
+    \end{minipage}
+    \caption{Орграф приращений $I(D,\phi)$ и модифицированный орграф}
+\end{figure}
+Мы видим, что для орграфа $D'$, соотвествующего  потоку $\phi_2$ не
+существует пути из источника в сток, а следовательно, $\phi_3$ – полный поток.
+Для увеличения полного потока до максимального нужно построить орграф приращений.
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream14.svg}
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream15.svg}
+    \end{minipage}
+    \caption{}
+\end{figure}
+Для построения  максимального потока воспользуемся алгоритмом Форда-Фалкерсона.
+Начинаем с ранее построенного потока $\phi_5$. Выделяем в $I(D,\phi)$
+простую цепь $\eta_6=v_1v_6v_3v_5v_9$. Увеличиваем потоки по дугам из $\eta_4$
+на одинаковую величину, равную 3, до насыщения $(v_1,v_6)$, при этом поток по дугам $(v_3,v_5),(v_5,v_9)$
+не превышает пропускной способности, а по дуге $(v_3,v_6)$ уменьшается на 3.
+В результате поток $\phi_5$ меняется на поток $\phi_6$. Далее строим модифицированный орграф приращений.
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream16.svg}
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream17.svg}
+    \end{minipage}
+    \caption{}
+\end{figure}
+Выполняем те же самые действия для цепи $v_1v_4v_2v_5v_8v_9$ (увеличиваем поток по ней на 4, получаем $\phi_7$)
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream18.svg}
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream19.svg}
+    \end{minipage}
+    \caption{}
+\end{figure}
+Выполняем те же самые действия для цепи $v_1v_4v_7v_5v_9$ (увеличиваем поток на 1 по ней на 1, получаем $\phi_8$)
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream20.svg}
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \includesvg[scale=0.6]{graphs/stream21.svg}
+    \end{minipage}
+    \caption{}
+\end{figure}
+Поскольку в $I(D,\phi_8)$ вешина $v_9$ не достижима из $v_1$, то согласно алгоритму - $\phi_8$ - искомый максимальный поток,
+при этом $\overline\phi_8=26$.
 \end{document}
