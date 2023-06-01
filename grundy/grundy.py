@@ -1,6 +1,6 @@
+#!/usr/bin/env python3
 import matplotlib.pyplot as plt
 import networkx as nx
-
 
 class InvalidMatrixException(Exception):
     pass
@@ -28,7 +28,7 @@ def input_digraph() -> list[list[int]]:
         m.append(line)
     return m
 
-def digraph_levels(m: list[list[int]]) -> list[list[int]]:
+def digraph_levels(m: list[list[int]]):
     levels=[]
     n = len(m[0])
     lmbd = [sum(i) for i in m]
@@ -50,27 +50,42 @@ def digraph_levels(m: list[list[int]]) -> list[list[int]]:
         if has_circuit: return False
         lmbd = new_lmbd
         levels.append(level)
-    
     return levels
 
-def graph_display(m: list[list[int]]):
+def grundy_from_levels(m, levels):
+    n = len(m[0])
+    grundy_values = [0]*n
+    if len(grundy_values) > 1:
+        for v in levels[1]:
+            grundy_values[v-1] = 1
+        for level in levels[2:]:
+            for v in level:
+                temp = [dv for i,dv in enumerate(grundy_values) if m[v-1][i] == 1]
+                temp = set(temp)
+                mex = 0
+                while mex in temp:
+                    mex += 1
+                grundy_values[v-1] = mex
+    return grundy_values 
+
+def graph_display(m, grundy):
     G = nx.DiGraph()
     n = len(m[0])
     for i in range(n):
-        G.add_node(i+1)
+        G.add_node(str(i+1)+' ('+str(grundy[i]) +")")
         for j in range(n):
             if m[i][j] == 1:
-                G.add_edge(i+1,j+1)
-    nx.draw(G, with_labels=True, font_weight='bold')
+                G.add_edge(str(i+1)+' ('+str(grundy[i]) + ')' ,str(j+1)+' ('+str(grundy[j]) + ')')
+    nx.draw_spectral(G, with_labels=True, node_size=1300,font_weight="bold")
     plt.show()
 
 def main():
     m = input_digraph()
-    print(digraph_levels(m))
-    graph_display(m)
+    l = digraph_levels(m)
+    if l:
+        g = grundy_from_levels(m,l)
+        graph_display(m,g)
+
 
 if __name__ == "__main__":
     main()
-
-#nx.draw(G, with_labels=True, font_weight='bold')
-#plt.show()

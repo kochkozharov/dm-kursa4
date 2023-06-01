@@ -6,3 +6,4 @@
 *.pdf
 !cp.pdf
 /svg-inkscape
+.venv
