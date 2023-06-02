@@ -21,7 +21,8 @@ def input_digraph() -> list[list[int]]:
 
     for _ in range(n-1):
         line =list(map(int, input().split()))
-        set_line = set(first_line)
+        set_line = set(line)
+        print(list(set_line))
         if set_line != set([1]) and set_line != set([0]) and set_line != set([0,1]):
             raise InvalidMatrixException("Adjacency matrix can only contain 0 or 1")
         if len(line) != n:
@@ -77,22 +78,25 @@ def graph_display(m, grundy):
         for j in range(n):
             if m[i][j] == 1:
                 G.add_edge(str(i+1)+' ('+str(grundy[i]) + ')' ,str(j+1)+' ('+str(grundy[j]) + ')')
-    nx.draw_shell(G, with_labels=True, node_size=1300,font_weight="bold")
+    nx.draw_spectral(G, with_labels=True, node_size=1300,font_weight="bold")
     plt.show()
 
 
-def rec_grundy(matrix, v0, vertex):
-    if not any(matrix[vertex-1]):
-        return 0
-    
-    if v0 == vertex:
-        return 0
-    
-    values = [rec_grundy(matrix, v0, i+1) for i in range(len(matrix)) if matrix[vertex-1][i]]
-    result = 0
-    while result in values:
-        result += 1
-    return result
+
+#def rec_grundy(matrix, v0, vertex):
+#    if not any(matrix[vertex-1]):
+#        return 0
+#    
+#    if v0 == vertex:
+#        return 0
+#    
+#    values = [rec_grundy(matrix, v0, i+1) for i in range(len(matrix)) if matrix[vertex-1][i]]
+#    result = 0
+#    while result in values:
+#        result += 1
+#    return result
+
+
 
 def main():
     m = input_digraph()
@@ -101,13 +105,15 @@ def main():
         g = grundy_from_levels(m,l)
         graph_display(m,g)
     else:
-        for v0 in range(1, len(m[0])+1):
-            for v in [i + 1 for i in range(len(m[0])) if m[v0-1][i]]:
-                print(v)
-                if rec_grundy(m,v0,v) == 1:
-                    g = [rec_grundy(m,v0,i+1) for i in range(len(m[0]))]
-                    graph_display(m,g)
-                    return
+        print("Орграф содержит контуры, перехоим к поиску ядер.")
+#    else:
+#        for v0 in range(1, len(m[0])+1):
+#            for v in [i + 1 for i in range(len(m[0])) if m[v0-1][i]]:
+#                print(v)
+#                if rec_grundy(m,v0,v) == 1:
+#                    g = [rec_grundy(m,v0,i+1) for i in range(len(m[0]))]
+#                    graph_display(m,g)
+#                    return
 
 
 if __name__ == "__main__":
