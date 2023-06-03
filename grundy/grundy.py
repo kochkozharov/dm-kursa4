@@ -134,7 +134,7 @@ def main():
         grundy = grundy_from_levels(m,l)
         graph_display(m, grundy)
     else:
-        print("The digraph contains circuits,"
+        print("The digraph contains circuits, "
               "proceed to the search for the cores")
         cores = graph_cores(m)
         if cores == []:
