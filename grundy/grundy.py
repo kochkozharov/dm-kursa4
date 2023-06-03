@@ -10,8 +10,10 @@ def input_digraph() -> list[list[int]]:
     first_line = list(map(int, input().split()))
     set_line = set(first_line)
 
-    if set_line != set([1]) and set_line != set([0]) and set_line != set([0,1]):
-        raise InvalidMatrixException("Adjacency matrix can only contain 0 or 1")
+    if set_line != set([1]) and set_line != set([0])\
+                            and set_line != set([0,1]):
+        raise InvalidMatrixException("Adjacency matrix " 
+                                     "can only contain 0 or 1")
     n = len(first_line)
 
     m = [first_line]
@@ -19,8 +21,10 @@ def input_digraph() -> list[list[int]]:
     for _ in range(n-1):
         line =list(map(int, input().split()))
         set_line = set(line)
-        if set_line != set([1]) and set_line != set([0]) and set_line != set([0,1]):
-            raise InvalidMatrixException("Adjacency matrix can only contain 0 or 1")
+        if set_line != set([1]) and set_line != set([0]) \
+                                and set_line != set([0,1]):
+            raise InvalidMatrixException("Adjacency matrix"
+                                         "can only contain 0 or 1")
         if len(line) != n:
             raise InvalidMatrixException("Invalid matrix line size")
         m.append(line)
@@ -58,7 +62,8 @@ def grundy_from_levels(m, levels):
             grundy_values[v] = 1
         for level in levels[2:]:
             for v in level:
-                temp = [dv for i,dv in enumerate(grundy_values) if m[v][i] == 1]
+                temp = [dv for i,dv in enumerate(grundy_values)
+                         if m[v][i] == 1]
                 temp = set(temp)
                 mex = 0
                 while mex in temp:
@@ -87,7 +92,8 @@ def graph_cores(m):
     for line in product([0,1], repeat=n):
         res = True
         for dis in cnf1:
-            res = res and (not line[dis[0]] or not line[dis[1]])
+            res = res and (not line[dis[0]]
+                            or not line[dis[1]])
         for dis in cnf2:
             res = res and any(line[i] for i in dis)
         if res == True:
@@ -100,7 +106,8 @@ def graph_cores(m):
 def rec_grundy(matrix, vertex, core):
     if vertex in core:
         return 0
-    values = [rec_grundy(matrix, i, core) for i in range(len(matrix)) if matrix[vertex][i]]
+    values = [rec_grundy(matrix, i, core) for 
+              i in range(len(matrix)) if matrix[vertex][i]]
     result = 0
     while result in values:
         result += 1
@@ -113,8 +120,10 @@ def graph_display(m, grundy):
         G.add_node(str(i+1)+' ('+str(grundy[i]) +")")
         for j in range(n):
             if m[i][j] == 1:
-                G.add_edge(str(i+1)+' ('+str(grundy[i]) + ')' ,str(j+1)+' ('+str(grundy[j]) + ')')
-    nx.draw_planar(G, with_labels=True, node_size=1300,font_weight="bold")
+                G.add_edge(str(i+1)+' ('+str(grundy[i]) + ')',
+                           str(j+1)+' ('+str(grundy[j]) + ')')
+    nx.draw_planar(G, with_labels=True, node_size=1300
+                   ,font_weight="bold")
     plt.show()
 
 def main():
@@ -125,13 +134,16 @@ def main():
         grundy = grundy_from_levels(m,l)
         graph_display(m, grundy)
     else:
-        print("Орграф содержит контуры, переходим к поиску ядер.")
+        print("The digraph contains circuits,"
+              "proceed to the search for the cores")
         cores = graph_cores(m)
         if cores == []:
-            print("Функция Гранди недопустима для этого графа")
+            print("Grundy's function is"
+                  "invalid for this digraph")
         else:
             for core in cores:
-                grundy = [rec_grundy(m,i,core) for i in range(n)]
+                grundy = [rec_grundy(m,i,core) 
+                          for i in range(n)]
                 graph_display(m, grundy)
 
 if __name__ == "__main__":

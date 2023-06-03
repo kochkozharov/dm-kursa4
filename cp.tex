@@ -14,6 +14,8 @@
 \usepackage{caption}
 \usepackage[small]{titlesec}
 \usepackage{amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
 \let\oldemptyset\emptyset
 \let\emptyset\varnothing
 \clubpenalty=10000 
@@ -846,7 +848,10 @@ $N \cap D(v) \neq \emptyset$.
 \]
 Эту КНФ нужно привести к СДНФ с помощью построения таблиц истинности. Получаем СДНФ, которая будет соответсвовать всем ядрам графа.
 \section{Программа алгоритма}
+Для работы скрипта необходимы библиотеки NetworkX и MatPlotLib. На вход требеуется корректная матрица смежности графа.
+Если функция допустима, то в отдельном окне откроется граф с подписанными значениями функции Гранди в вершинах. При закрытии окна, то откроется следующая возможная функция (если такая существует).
+Иначе, скрипт сообщит о том, что функция недопустима.
+\lstinputlisting[language=Python]{grundy/grundy.py}
 \section{Примеры}
 \section{Оценка сложности}
-
 \end{document}
