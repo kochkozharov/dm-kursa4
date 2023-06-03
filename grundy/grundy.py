@@ -6,9 +6,6 @@ from itertools import product
 class InvalidMatrixException(Exception):
     pass
 
-class InvalidGraphException(Exception):
-    pass
-
 def input_digraph() -> list[list[int]]:
     first_line = list(map(int, input().split()))
     set_line = set(first_line)
@@ -76,13 +73,6 @@ def graph_cores(m):
         for j in range(n):
             if m[i][j] == 1:
                 cnf1.append((i,j))
-    min_vnut = set()
-    for line in product([0,1], repeat=n):
-        res = True
-        for dis in cnf1:
-            res = res and (not line[dis[0]] or not line[dis[1]])
-        if res == True:
-            min_vnut.add(line)
     
     cnf2 = []
     for i in range(n):
@@ -91,18 +81,30 @@ def graph_cores(m):
             if m[i][j] == 1:
                 dis.append(j)
         cnf2.append(dis)
-    max_vnesh = set()
+    
+    cores = []
+
     for line in product([0,1], repeat=n):
         res = True
+        for dis in cnf1:
+            res = res and (not line[dis[0]] or not line[dis[1]])
         for dis in cnf2:
             res = res and any(line[i] for i in dis)
         if res == True:
-            max_vnesh.add(line)
+            cores.append(line)
     
-    cores = list(min_vnut & max_vnesh)
     for i in range(len(cores)):
         cores[i] = [j for j,v in enumerate(cores[i]) if v==1]
     return cores
+
+def rec_grundy(matrix, vertex, core):
+    if vertex in core:
+        return 0
+    values = [rec_grundy(matrix, i, core) for i in range(len(matrix)) if matrix[vertex][i]]
+    result = 0
+    while result in values:
+        result += 1
+    return result
 
 def graph_display(m, grundy):
     G = nx.DiGraph()
@@ -114,15 +116,6 @@ def graph_display(m, grundy):
                 G.add_edge(str(i+1)+' ('+str(grundy[i]) + ')' ,str(j+1)+' ('+str(grundy[j]) + ')')
     nx.draw_planar(G, with_labels=True, node_size=1300,font_weight="bold")
     plt.show()
-
-def rec_grundy(matrix, vertex, core):
-    if vertex in core:
-        return 0
-    values = [rec_grundy(matrix, i, core) for i in range(len(matrix)) if matrix[vertex][i]]
-    result = 0
-    while result in values:
-        result += 1
-    return result
 
 def main():
     m = input_digraph()
